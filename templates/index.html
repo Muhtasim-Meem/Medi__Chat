@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medi ChatBot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="chat-container">
+    <h1>Medi Chat 💬</h1>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Type your question..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('user-input');
+    const chatBox = document.getElementById('chat-box');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = input.value;
+      chatBox.innerHTML += `<div class="user-msg">You: ${msg}</div>`;
+      input.value = '';
+
+      const res = await fetch('/get', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ msg })
+      });
+
+      const data = await res.text();
+      chatBox.innerHTML += `<div class="bot-msg">Bot: ${data}</div>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>
