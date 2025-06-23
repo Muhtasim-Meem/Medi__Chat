@@ -33,7 +33,7 @@ This project uses 6 CSV files for medicine-related information, such as:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/bd-medicine-chatbot.git
+https://github.com/Muhtasim-Meem/Medi__Chat.git
 cd bd-medicine-chatbot
 ```
 ### Step 2: Install Requirements
